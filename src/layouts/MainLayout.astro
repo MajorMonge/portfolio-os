@@ -1,0 +1,18 @@
+---
+import '@styles/global.scss';
+import '@styles/themes/win/95daisy.scss';
+---
+
+<html lang="en" data-theme="coffee">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>Astro</title>
+	</head>
+	<body class="min-h-screen bg-accent">
+        <slot />
+	</body>
+</html>

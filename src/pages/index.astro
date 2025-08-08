@@ -1,16 +1,32 @@
 ---
+import MainLayout from "@/layouts/MainLayout.astro";
+import Window from "@/components/Window";
+import Taskbar from "@/components/Taskbar";
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout>
+		<Window
+		client:load
+			title="My Window"
+		>
+			<div class="p-4">
+				<p>This is the content of the window.</p>
+			</div>
+		</Window>
+		<Window
+		client:load
+			title="Another Window"
+			initialX={200}
+			initialY={200}
+			width={500}
+			visibleTopbar={false}
+			resizable={false}
+		>
+			<div class="p-4">
+				<p>This is another window with a custom position and size.</p>
+				<button class="btn btn-primary">Click Me!</button>
+			</div>
+		</Window>
+		<Taskbar />
+</MainLayout>

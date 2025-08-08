@@ -1,0 +1,9 @@
+@use "tailwindcss";
+
+@plugin "daisyui" {
+  themes: all;
+}
+
+html,
+body {
+}
