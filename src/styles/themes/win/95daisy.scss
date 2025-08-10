@@ -131,7 +131,8 @@
 
     font-family: ArialPixel, system-ui, sans-serif;
     font-weight: 400;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
 
     .btn,
     button,
@@ -179,11 +180,6 @@
         color: grey !important;
         transition: none !important;
         font-weight: 500;
-
-        &:hover {
-          cursor: not-allowed !important;
-        }
-
         cursor: not-allowed !important;
       }
 
@@ -207,6 +203,7 @@
     .menu,
     .navbar,
     .card,
+    .dropdown-content,
     .hero {
       transition: none !important;
       box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px var(--color-base-300), inset 2px 2px #fff !important;
