@@ -7,6 +7,8 @@ app = 'portfolio-os'
 primary_region = 'gru'
 
 [build]
+  builder = "paketobuildpacks/builder:base"
+  buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
 
 [env]
   PORT = '8080'
