@@ -1,9 +1,11 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import preact from '@astrojs/preact';
 
 import tailwindcss from '@tailwindcss/vite';
+
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +13,17 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  adapter: node({
+    mode: 'standalone'
+  }),
+  env: {
+    schema: {
+      NOTION_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      })
+    }
   }
 });
