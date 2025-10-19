@@ -4,6 +4,7 @@ import { useTranslation } from "@/i18n";
 
 interface WindowTopbarProps {
   title: string | JSX.Element;
+  isActive?: boolean;
   onMouseDown: (e: MouseEvent) => void;
   onClose?: () => void;
   onMinimize?: () => void;
@@ -12,6 +13,7 @@ interface WindowTopbarProps {
 
 export default function WindowTopbar({
   title,
+  isActive = true,
   onMouseDown,
   onClose,
   onMinimize,
@@ -21,14 +23,18 @@ export default function WindowTopbar({
 
   return (
     <div
-      class="flex items-center justify-between bg-base-200 border-b-2 border-base-300  topbar"
+      class={`flex items-center justify-between border-b-2 border-base-300/70 topbar bg-base-200 ${
+        isActive && "bg-base-300 topbar-active"
+      }`}
       onMouseDown={onMouseDown}
     >
       <div class="flex items-center min-w-0 flex-1 select-none">
         {typeof title === "string" ? (
           <span
             title={title}
-            class="text-base font-medium text-base-content truncate pl-2 py-2 topbar-title"
+            class={`text-base font-medium text-base-content truncate pl-2 py-2 opacity-50 topbar-title  ${
+              isActive && "opacity-100 topbar-title-active"
+            }`}
           >
             {title}
           </span>
@@ -39,7 +45,9 @@ export default function WindowTopbar({
 
       <div class="flex items-center gap-1 p-2 topbar-buttons">
         <button
-          class="btn btn-sm btn-square"
+          class={`btn btn-sm btn-square opacity-50 ${
+            isActive && "opacity-100"
+          }`}
           onClick={(e) => {
             e.stopPropagation();
             onMinimize && onMinimize();
@@ -54,7 +62,9 @@ export default function WindowTopbar({
         </button>
 
         <button
-          class="btn btn-sm btn-square"
+          class={`btn btn-sm btn-square opacity-50 ${
+            isActive && "opacity-100"
+          }`}
           onClick={(e) => {
             e.stopPropagation();
             onMaximize && onMaximize();
@@ -68,7 +78,9 @@ export default function WindowTopbar({
           □
         </button>
         <button
-          class="btn btn-sm btn-error btn-square"
+          class={`btn btn-sm btn-square btn-error  opacity-50 ${
+            isActive && "opacity-100"
+          }`}
           onClick={(e) => {
             e.stopPropagation();
             onClose && onClose();
