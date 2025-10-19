@@ -8,6 +8,13 @@ export default {
       close: 'Close',
       minimize: 'Minimize',
       maximize: 'Maximize',
+    },
+    ui: {
+      taskbar: {
+        localeSelector: {
+          tooltip: 'Select Language',
+        },
+      },
     }
   }
 }
