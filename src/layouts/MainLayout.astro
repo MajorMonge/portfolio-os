@@ -3,123 +3,21 @@ import "@styles/global.scss";
 import "@styles/themes/win/95daisy.scss";
 ---
 
-<html lang="en" data-theme="win95">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
 
-		<title>Astro</title>
-	</head>
-	<body class="min-h-screen bg-accent" data-theme="win95">
-		<div class="dropdown  dropdown-end mb-72 fixed top-2 right-2">
-			<div tabindex="0" role="button" class="btn m-1">
-				Theme
-				<svg
-					width="12px"
-					height="12px"
-					class="inline-block h-2 w-2 fill-current opacity-60"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 2048 2048"
-				>
-					<path	
-						d="M1799 349l242 241-1017 1017L7 590l242-241 775 775 775-775z"
-					></path>
-				</svg>
-			</div>
-			<ul
-				tabindex="0"
-				class="dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-2xl mr-2"
-			>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="win95"
-						value="win95"
-						checked
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Retro"
-						value="retro"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Cyberpunk"
-						value="cyberpunk"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Valentine"
-						value="valentine"
-					/>
-				</li>
-				<li>
-					<input
-						type="radio"
-						name="theme-dropdown"
-						class="theme-controller w-full btn btn-sm btn-block btn-ghost justify-start"
-						aria-label="Aqua"
-						value="aqua"
-					/>
-				</li>
-			</ul>
-		</div>
-		<slot />
-		
-		<script>
-			// Theme controller script
-			function initThemeController() {
-				const themeControllers = document.querySelectorAll('input[name="theme-dropdown"]');
-				const htmlElement = document.documentElement;
-				const bodyElement = document.body;
-				
-				// Set initial theme from localStorage or default to win95
-				const savedTheme = localStorage.getItem('theme') || 'win95';
-				htmlElement.setAttribute('data-theme', savedTheme);
-				bodyElement.setAttribute('data-theme', savedTheme);
-				
-				// Set the corresponding radio button as checked
-				const activeController = document.querySelector(`input[value="${savedTheme}"]`);
-				if (activeController && activeController instanceof HTMLInputElement) {
-					activeController.checked = true;
-				}
-				
-				// Add event listeners to theme controllers
-				themeControllers.forEach(controller => {
-					controller.addEventListener('change', (e) => {
-						const target = e.target;
-						if (target && target instanceof HTMLInputElement && target.checked) {
-							const theme = target.value;
-							htmlElement.setAttribute('data-theme', theme);
-							bodyElement.setAttribute('data-theme', theme);
-							localStorage.setItem('theme', theme);
-						}
-					});
-				});
-			}
-			
-			// Initialize when DOM is loaded
-			if (document.readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', initThemeController);
-			} else {
-				initThemeController();
-			}
-		</script>
-	</body>
+    <title>Astro</title>
+    <script is:inline>
+      const storedTheme = localStorage.getItem("themeStore") || "win95";
+      document.documentElement.setAttribute("data-theme", storedTheme);
+      document.documentElement.setAttribute("data-language", "pt-BR");
+    </script>
+  </head>
+  <body class="min-h-screen bg-primary">
+    <slot />
+  </body>
 </html>
