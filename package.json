@@ -5,10 +5,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "start": "node ./dist/server/entry.mjs"
   },
   "dependencies": {
+    "@astrojs/node": "^9.4.6",
     "@astrojs/preact": "^4.1.0",
+    "@nanostores/persistent": "^1.1.0",
+    "@nanostores/preact": "^1.0.0",
+    "@nanostores/react": "^1.0.0",
+    "@notionhq/client": "^5.1.0",
     "@tailwindcss/postcss": "^4.1.11",
     "@tailwindcss/vite": "^4.1.8",
     "astro": "^5.8.1",
