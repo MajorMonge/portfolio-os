@@ -62,6 +62,8 @@
 
   /* Primary colors - Windows 95 blue */
   --color-primary: #0f0086;
+  --color-primary-80: #4d4dff;
+  --color-primary-50: #b3b3ff;
   /* --color-blue from 95css */
   --color-primary-content: #ffffff;
   /* --color-white from 95css */
@@ -533,10 +535,20 @@
 
     .topbar {
       align-items: center !important;
-      background: linear-gradient(90deg, var(--color-primary)) !important;
+      background: linear-gradient(90deg, var(--color-primary-80)) !important;
       display: flex !important;
       padding: 3px !important;
       border: none !important;
+
+      &.topbar-active {
+        background: linear-gradient(90deg, var(--color-primary)) !important;
+
+
+        .topbar-title {
+          color: var(--color-primary-content);
+        }
+      }
+
 
       &.disabled {
         background: linear-gradient(90deg, var(--color-base-300)) !important;
