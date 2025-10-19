@@ -3,532 +3,459 @@ import MainLayout from "@layouts/MainLayout.astro";
 ---
 
 <MainLayout>
-    <div class="container mx-auto p-8 space-y-12 bg-base-200">
-        <h1 class="text-4xl font-bold text-center">DaisyUI Component Zoo</h1>
+  <div class="container mx-auto p-8 space-y-12 bg-base-200">
+    <h1 class="text-4xl font-bold text-center">DaisyUI Component Zoo</h1>
 
-        <!-- Buttons -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4">Buttons</h2>
-            <div class="flex flex-wrap gap-4 items-center">
-                <button class="btn">Button</button>
-                <button class="btn btn-primary">Primary</button>
-                <button class="btn btn-secondary">Secondary</button>
-                <button class="btn btn-accent">Accent</button>
-                <button class="btn btn-ghost">Ghost</button>
-                <button class="btn btn-link">Link</button>
-                <button class="btn btn-active">Active</button>
-                <button class="btn" disabled>Disabled</button>
-            </div>
-        </section>
+    <!-- Buttons -->
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Buttons</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <button class="btn">Button</button>
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-accent">Accent</button>
+        <button class="btn btn-ghost">Ghost</button>
+        <button class="btn btn-link">Link</button>
+        <button class="btn btn-active">Active</button>
+        <button class="btn" disabled>Disabled</button>
+      </div>
+    </section>
 
-        <!-- Form Controls -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4">Form Controls</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <input
-                    type="text"
-                    placeholder="Text Input"
-                    class="input input-bordered w-full"
-                />
-                <label class="input">
-                    <span class="label">https://</span>
-                    <input type="text" placeholder="URL" />
-                </label>
-                <label class="floating-label">
-                    <input
-                        type="text"
-                        placeholder="Extra Small"
-                        class="input input-xs"
-                    />
-                    <span>Extra Small</span>
-                </label>
-                <label class="floating-label">
-                    <input
-                        type="text"
-                        placeholder="Small"
-                        class="input input-sm"
-                    />
-                    <span>Small</span>
-                </label>
-                <label class="floating-label">
-                    <input
-                        type="text"
-                        placeholder="Medium"
-                        class="input input-md"
-                    />
-                    <span>Medium</span>
-                </label>
-                <label class="floating-label">
-                    <input
-                        type="text"
-                        placeholder="Large"
-                        class="input input-lg"
-                    />
-                    <span>Large</span>
-                </label>
-                <label class="floating-label">
-                    <input
-                        type="text"
-                        placeholder="Extra Large"
-                        class="input input-xl"
-                    />
-                    <span>Extra Large</span>
-                </label>
-                <div class="form-control w-full">
-                    <label class="label">
-                        <span class="label-text"
-                            >Pick the best fantasy franchise</span
-                        >
-                    </label>
-                    <select class="select select-bordered">
-                        <option disabled selected>Pick one</option>
-                        <option>Star Wars</option>
-                        <option>Harry Potter</option>
-                        <option>Lord of the Rings</option>
-                    </select>
-                </div>
-                <div class="form-control">
-                    <label class="label cursor-pointer">
-                        <span class="label-text">Checkbox</span>
-                        <input
-                            type="checkbox"
-                            checked="checked"
-                            class="checkbox"
-                        />
-                    </label>
-                </div>
-                <div class="form-control">
-                    <label class="label cursor-pointer">
-                        <span class="label-text">Radio</span>
-                        <input
-                            type="radio"
-                            name="radio-1"
-                            class="radio"
-                            checked
-                        />
-                    </label>
-                </div>
-                <div class="form-control">
-                    <label class="label"
-                        ><span class="label-text">Range</span></label
-                    >
-                    <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value="40"
-                        class="range"
-                    />
-                    <div class="w-full max-w-xs">
-                        <input
-                            type="range"
-                            min="0"
-                            max="100"
-                            value="25"
-                            class="range"
-                            step="25"
-                        />
-                        <div class="flex justify-between px-2.5 mt-2 text-xs">
-                            <span>|</span>
-                            <span>|</span>
-                            <span>|</span>
-                            <span>|</span>
-                            <span>|</span>
-                        </div>
-                        <div class="flex justify-between px-2.5 mt-2 text-xs">
-                            <span>1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>5</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-control">
-                    <label class="label"
-                        ><span class="label-text">File Input</span></label
-                    >
-                    <input type="file" class="file-input w-full" />
-                </div>
-                <textarea
-                    class="textarea textarea-bordered"
-                    placeholder="Textarea"></textarea>
-                <div class="form-control w-52">
-                    <label class="cursor-pointer label">
-                        <span class="label-text">Toggle</span>
-                        <input type="checkbox" class="toggle" checked />
-                    </label>
-                </div>
-            </div>
-        </section>
-
-        <!-- Data Display -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4">Data Display</h2>
-            <div class="space-y-6">
-                <div class="alert alert-success shadow-lg">
-                    <div>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="stroke-current flex-shrink-0 h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            ><path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path></svg
-                        >
-                        <span>Your purchase has been confirmed!</span>
-                    </div>
-                </div>
-                <div class="flex gap-2">
-                    <div class="badge badge-primary">Primary</div>
-                    <div class="badge badge-secondary">Secondary</div>
-                    <div class="badge badge-accent">Accent</div>
-                </div>
-                <div class="card w-96 bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">Card Title</h2>
-                        <p>If a dog chews shoes whose shoes does he choose?</p>
-                        <div class="card-actions justify-end">
-                            <button class="btn btn-primary">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="chat chat-start">
-                    <div class="chat-bubble">
-                        It's over Anakin, I have the high ground.
-                    </div>
-                </div>
-                <div class="chat chat-end">
-                    <div class="chat-bubble">You underestimate my power!</div>
-                </div><div class="chat chat-start">
-                    <div class="chat-image avatar">
-                        <div class="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS chat bubble component"
-                                src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
-                            />
-                        </div>
-                    </div>
-                    <div class="chat-header">
-                        Obi-Wan Kenobi
-                        <time class="text-xs opacity-50">12:45</time>
-                    </div>
-                    <div class="chat-bubble">You were the Chosen One!</div>
-                    <div class="chat-footer opacity-50">Delivered</div>
-                </div>
-                <div class="chat chat-end">
-                    <div class="chat-image avatar">
-                        <div class="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS chat bubble component"
-                                src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
-                            />
-                        </div>
-                    </div>
-                    <div class="chat-header">
-                        Anakin
-                        <time class="text-xs opacity-50">12:46</time>
-                    </div>
-                    <div class="chat-bubble">I hate you!</div>
-                    <div class="chat-footer opacity-50">Seen at 12:46</div>
-                </div>
-                <div class="stats shadow">
-                    <div class="stat">
-                        <div class="stat-title">Total Page Views</div>
-                        <div class="stat-value">89,400</div>
-                        <div class="stat-desc">21% more than last month</div>
-                    </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="table w-full">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Job</th>
-                                <th>Favorite Color</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Cy Ganderton</td>
-                                <td>Quality Control Specialist</td>
-                                <td>Blue</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- Navigation -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4">Navigation</h2>
-            <div class="space-y-6">
-                <div class="text-sm breadcrumbs">
-                    <ul>
-                        <li><a>Home</a></li>
-                        <li><a>Documents</a></li>
-                        <li>Add Document</li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <label tabindex="0" class="btn m-1">Dropdown</label>
-                    <ul
-                        tabindex="0"
-                        class="dropdown-content menu p-2 shadow bg-base-100 w-52"
-                    >
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                    </ul>
-                </div>
-                <ul class="menu bg-base-200 w-56 rounded-box">
-                    <li class="menu-title"><span>Menu Title</span></li>
-                    <li><a>Item 1</a></li>
-                    <li><a>Item 2</a></li>
-                    <li><a>Item 3</a></li>
-                </ul>
-                <div class="navbar bg-base-200 rounded-box">
-                    <div class="flex-1">
-                        <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
-                    </div>
-                    <div class="flex-none">
-                        <ul class="menu menu-horizontal p-0">
-                            <li><a>Item 1</a></li>
-                            <li><a>Item 2</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div role="tablist" class="tabs tabs-lift">
-                    <a role="tab" class="tab">Tab 1</a>
-                    <a role="tab" class="tab tab-active">Tab 2</a>
-                    <a role="tab" class="tab">Tab 3</a>
-                </div>
-
-                <div role="tablist" class="tabs tabs-box">
-                    <a role="tab" class="tab">Tab 1</a>
-                    <a role="tab" class="tab tab-active">Tab 2</a>
-                    <a role="tab" class="tab">Tab 3</a>
-                </div>
-                <div class="join">
-                    <button class="join-item btn">1</button>
-                    <button class="join-item btn btn-active">2</button>
-                    <button class="join-item btn">3</button>
-                    <button class="join-item btn">4</button>
-                </div>
-                <!-- name of each tab group should be unique -->
-                <div class="tabs tabs-box">
-                    <input
-                        type="radio"
-                        name="my_tabs_1"
-                        class="tab"
-                        aria-label="Tab 1"
-                    />
-                    <input
-                        type="radio"
-                        name="my_tabs_1"
-                        class="tab"
-                        aria-label="Tab 2"
-                        checked="checked"
-                    />
-                    <input
-                        type="radio"
-                        name="my_tabs_1"
-                        class="tab"
-                        aria-label="Tab 3"
-                    />
-                </div>
-
-                <!-- name of each tab group should be unique -->
-                <div class="tabs tabs-lift">
-                    <input
-                        type="radio"
-                        name="my_tabs_3"
-                        class="tab"
-                        aria-label="Tab 1"
-                    />
-                    <div class="tab-content bg-base-100 border-base-300 p-6">
-                        Tab content 1
-                    </div>
-
-                    <input
-                        type="radio"
-                        name="my_tabs_3"
-                        class="tab"
-                        aria-label="Tab 2"
-                        checked="checked"
-                    />
-                    <div class="tab-content bg-base-100 border-base-300 p-6">
-                        Tab content 2
-                    </div>
-
-                    <input
-                        type="radio"
-                        name="my_tabs_3"
-                        class="tab"
-                        aria-label="Tab 3"
-                    />
-                    <div class="tab-content bg-base-100 border-base-300 p-6">
-                        Tab content 3
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Feedback -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4">Feedback</h2>
-            <div class="flex flex-wrap gap-4 items-center">
-                <span class="loading loading-spinner loading-lg"></span>
-                <progress class="progress w-56" value="20" max="100"></progress>
-                <div class="radial-progress" style="--value:70;">70%</div>
-                <div class="tooltip" data-tip="hello">
-                    <button class="btn">Tooltip</button>
-                </div>
-            </div>
-        </section>
-        <div class="collapse bg-base-100 border border-base-300">
-            <input type="radio" name="my-accordion-1" checked="checked" />
-            <div class="collapse-title font-semibold">
-                How do I create an account?
-            </div>
-            <div class="collapse-content text-sm">
-                Click the "Sign Up" button in the top right corner and follow
-                the registration process.
-            </div>
+    <!-- Form Controls -->
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Form Controls</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input
+          type="text"
+          placeholder="Text Input"
+          class="input input-bordered w-full"
+        />
+        <label class="input">
+          <span class="label">https://</span>
+          <input type="text" placeholder="URL" />
+        </label>
+        <label class="floating-label">
+          <input type="text" placeholder="Extra Small" class="input input-xs" />
+          <span>Extra Small</span>
+        </label>
+        <label class="floating-label">
+          <input type="text" placeholder="Small" class="input input-sm" />
+          <span>Small</span>
+        </label>
+        <label class="floating-label">
+          <input type="text" placeholder="Medium" class="input input-md" />
+          <span>Medium</span>
+        </label>
+        <label class="floating-label">
+          <input type="text" placeholder="Large" class="input input-lg" />
+          <span>Large</span>
+        </label>
+        <label class="floating-label">
+          <input type="text" placeholder="Extra Large" class="input input-xl" />
+          <span>Extra Large</span>
+        </label>
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Pick the best fantasy franchise</span>
+          </label>
+          <select class="select select-bordered">
+            <option disabled selected>Pick one</option>
+            <option>Star Wars</option>
+            <option>Harry Potter</option>
+            <option>Lord of the Rings</option>
+          </select>
         </div>
-        <div class="collapse bg-base-100 border border-base-300">
-            <input type="radio" name="my-accordion-1" />
-            <div class="collapse-title font-semibold">
-                I forgot my password. What should I do?
-            </div>
-            <div class="collapse-content text-sm">
-                Click on "Forgot Password" on the login page and follow the
-                instructions sent to your email.
-            </div>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Checkbox</span>
+            <input type="checkbox" checked="checked" class="checkbox" />
+          </label>
         </div>
-        <div class="collapse bg-base-100 border border-base-300">
-            <input type="radio" name="my-accordion-1" />
-            <div class="collapse-title font-semibold">
-                How do I update my profile information?
-            </div>
-            <div class="collapse-content text-sm">
-                Go to "My Account" settings and select "Edit Profile" to make
-                changes.
-            </div>
+        <div class="form-control">
+          <label class="label cursor-pointer">
+            <span class="label-text">Radio</span>
+            <input type="radio" name="radio-1" class="radio" checked />
+          </label>
         </div>
-        <div class="join join-vertical bg-base-100 w-full">
-            <div
-                class="collapse collapse-arrow join-item border-base-300 border"
+        <div class="form-control">
+          <label class="label"><span class="label-text">Range</span></label>
+          <input type="range" min="0" max="100" value="40" class="range" />
+          <div class="w-full max-w-xs">
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value="25"
+              class="range"
+              step="25"
+            />
+            <div class="flex justify-between px-2.5 mt-2 text-xs">
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+              <span>|</span>
+            </div>
+            <div class="flex justify-between px-2.5 mt-2 text-xs">
+              <span>1</span>
+              <span>2</span>
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text">File Input</span></label
+          >
+          <input type="file" class="file-input w-full" />
+        </div>
+        <textarea class="textarea textarea-bordered" placeholder="Textarea"
+        ></textarea>
+        <div class="form-control w-52">
+          <label class="cursor-pointer label">
+            <span class="label-text">Toggle</span>
+            <input type="checkbox" class="toggle" checked />
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data Display -->
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Data Display</h2>
+      <div class="space-y-6">
+        <div class="alert alert-success shadow-lg">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="stroke-current flex-shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg
             >
-                <input type="radio" name="my-accordion-4" checked="checked" />
-                <div class="collapse-title font-semibold">
-                    How do I create an account?
-                </div>
-                <div class="collapse-content text-sm">
-                    Click the "Sign Up" button in the top right corner and
-                    follow the registration process.
-                </div>
-            </div>
-            <div
-                class="collapse collapse-arrow join-item border-base-300 border"
-            >
-                <input type="radio" name="my-accordion-4" />
-                <div class="collapse-title font-semibold">
-                    I forgot my password. What should I do?
-                </div>
-                <div class="collapse-content text-sm">
-                    Click on "Forgot Password" on the login page and follow the
-                    instructions sent to your email.
-                </div>
-            </div>
-            <div
-                class="collapse collapse-arrow join-item border-base-300 border"
-            >
-                <input type="radio" name="my-accordion-4" />
-                <div class="collapse-title font-semibold">
-                    How do I update my profile information?
-                </div>
-                <div class="collapse-content text-sm">
-                    Go to "My Account" settings and select "Edit Profile" to
-                    make changes.
-                </div>
-            </div>
-        </div><div
-            class="collapse collapse-plus bg-base-100 border border-base-300"
-        >
-            <input type="radio" name="my-accordion-3" checked="checked" />
-            <div class="collapse-title font-semibold">
-                How do I create an account?
-            </div>
-            <div class="collapse-content text-sm">
-                Click the "Sign Up" button in the top right corner and follow
-                the registration process.
-            </div>
+            <span>Your purchase has been confirmed!</span>
+          </div>
         </div>
-        <div class="collapse collapse-plus bg-base-100 border border-base-300">
-            <input type="radio" name="my-accordion-3" />
-            <div class="collapse-title font-semibold">
-                I forgot my password. What should I do?
-            </div>
-            <div class="collapse-content text-sm">
-                Click on "Forgot Password" on the login page and follow the
-                instructions sent to your email.
-            </div>
+        <div class="flex gap-2">
+          <div class="badge badge-primary">Primary</div>
+          <div class="badge badge-secondary">Secondary</div>
+          <div class="badge badge-accent">Accent</div>
         </div>
-        <div class="collapse collapse-plus bg-base-100 border border-base-300">
-            <input type="radio" name="my-accordion-3" />
-            <div class="collapse-title font-semibold">
-                How do I update my profile information?
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h2 class="card-title">Card Title</h2>
+            <p>If a dog chews shoes whose shoes does he choose?</p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">Buy Now</button>
             </div>
-            <div class="collapse-content text-sm">
-                Go to "My Account" settings and select "Edit Profile" to make
-                changes.
-            </div>
+          </div>
         </div>
-        <!-- Layout -->
-        <section>
-            <h2 class="text-2xl font-bold mb-4">Layout</h2>
-            <div class="space-y-6">
-                <div class="divider">Divider</div>
-                <div class="hero bg-base-200">
-                    <div class="hero-content text-center">
-                        <div class="max-w-md">
-                            <h1 class="text-5xl font-bold">Hello there</h1>
-                            <p class="py-6">
-                                Provident cupiditate voluptatem et in. Quaerat
-                                fugiat ut assumenda excepturi exercitationem
-                                quasi.
-                            </p>
-                            <button class="btn btn-primary">Get Started</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="indicator">
-                    <span class="indicator-item badge badge-secondary">new</span
-                    >
-                    <button class="btn">Indicator</button>
-                </div>
-            </div>
-        </section>
-        <div class="stack">
-            <div class="card shadow-md bg-primary text-primary-content">
-                <div class="card-body">
-                    <h2 class="card-title">Notification 1</h2>
-                    <p>You have 3 unread messages.</p>
-                </div>
-            </div>
-            <div class="card shadow bg-primary text-primary-content">
-                <div class="card-body">
-                    <h2 class="card-title">Notification 2</h2>
-                    <p>You have 3 unread messages.</p>
-                </div>
-            </div>
+        <div class="chat chat-start">
+          <div class="chat-bubble">
+            It's over Anakin, I have the high ground.
+          </div>
         </div>
+        <div class="chat chat-end">
+          <div class="chat-bubble">You underestimate my power!</div>
+        </div><div class="chat chat-start">
+          <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+              <img
+                alt="Tailwind CSS chat bubble component"
+                src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+              />
+            </div>
+          </div>
+          <div class="chat-header">
+            Obi-Wan Kenobi
+            <time class="text-xs opacity-50">12:45</time>
+          </div>
+          <div class="chat-bubble">You were the Chosen One!</div>
+          <div class="chat-footer opacity-50">Delivered</div>
+        </div>
+        <div class="chat chat-end">
+          <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+              <img
+                alt="Tailwind CSS chat bubble component"
+                src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+              />
+            </div>
+          </div>
+          <div class="chat-header">
+            Anakin
+            <time class="text-xs opacity-50">12:46</time>
+          </div>
+          <div class="chat-bubble">I hate you!</div>
+          <div class="chat-footer opacity-50">Seen at 12:46</div>
+        </div>
+        <div class="stats shadow">
+          <div class="stat">
+            <div class="stat-title">Total Page Views</div>
+            <div class="stat-value">89,400</div>
+            <div class="stat-desc">21% more than last month</div>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="table w-full">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Favorite Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Blue</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation -->
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Navigation</h2>
+      <div class="space-y-6">
+        <div class="text-sm breadcrumbs">
+          <ul>
+            <li><a>Home</a></li>
+            <li><a>Documents</a></li>
+            <li>Add Document</li>
+          </ul>
+        </div>
+        <div class="dropdown">
+          <label tabindex="0" class="btn m-1">Dropdown</label>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu p-2 shadow bg-base-100 w-52"
+          >
+            <li><a>Item 1</a></li>
+            <li><a>Item 2</a></li>
+          </ul>
+        </div>
+        <ul class="menu bg-base-200 w-56 rounded-box">
+          <li class="menu-title"><span>Menu Title</span></li>
+          <li><a>Item 1</a></li>
+          <li><a>Item 2</a></li>
+          <li><a>Item 3</a></li>
+        </ul>
+        <div class="navbar bg-base-200 rounded-box">
+          <div class="flex-1">
+            <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+          </div>
+          <div class="flex-none">
+            <ul class="menu menu-horizontal p-0">
+              <li><a>Item 1</a></li>
+              <li><a>Item 2</a></li>
+            </ul>
+          </div>
+        </div>
+        <div role="tablist" class="tabs tabs-lift">
+          <a role="tab" class="tab">Tab 1</a>
+          <a role="tab" class="tab tab-active">Tab 2</a>
+          <a role="tab" class="tab">Tab 3</a>
+        </div>
+
+        <div role="tablist" class="tabs tabs-box">
+          <a role="tab" class="tab">Tab 1</a>
+          <a role="tab" class="tab tab-active">Tab 2</a>
+          <a role="tab" class="tab">Tab 3</a>
+        </div>
+        <div class="join">
+          <button class="join-item btn">1</button>
+          <button class="join-item btn btn-active">2</button>
+          <button class="join-item btn">3</button>
+          <button class="join-item btn">4</button>
+        </div>
+        <!-- name of each tab group should be unique -->
+        <div class="tabs tabs-box">
+          <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 1" />
+          <input
+            type="radio"
+            name="my_tabs_1"
+            class="tab"
+            aria-label="Tab 2"
+            checked="checked"
+          />
+          <input type="radio" name="my_tabs_1" class="tab" aria-label="Tab 3" />
+        </div>
+
+        <!-- name of each tab group should be unique -->
+        <div class="tabs tabs-lift">
+          <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 1" />
+          <div class="tab-content bg-base-100 border-base-300 p-6">
+            Tab content 1
+          </div>
+
+          <input
+            type="radio"
+            name="my_tabs_3"
+            class="tab"
+            aria-label="Tab 2"
+            checked="checked"
+          />
+          <div class="tab-content bg-base-100 border-base-300 p-6">
+            Tab content 2
+          </div>
+
+          <input type="radio" name="my_tabs_3" class="tab" aria-label="Tab 3" />
+          <div class="tab-content bg-base-100 border-base-300 p-6">
+            Tab content 3
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feedback -->
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Feedback</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <span class="loading loading-spinner loading-lg"></span>
+        <progress class="progress w-56" value="20" max="100"></progress>
+        <div class="radial-progress" style="--value:70;">70%</div>
+        <div class="tooltip" data-tip="hello">
+          <button class="btn">Tooltip</button>
+        </div>
+      </div>
+    </section>
+    <div class="collapse bg-base-100 border border-base-300">
+      <input type="radio" name="my-accordion-1" checked="checked" />
+      <div class="collapse-title font-semibold">
+        How do I create an account?
+      </div>
+      <div class="collapse-content text-sm">
+        Click the "Sign Up" button in the top right corner and follow the
+        registration process.
+      </div>
     </div>
+    <div class="collapse bg-base-100 border border-base-300">
+      <input type="radio" name="my-accordion-1" />
+      <div class="collapse-title font-semibold">
+        I forgot my password. What should I do?
+      </div>
+      <div class="collapse-content text-sm">
+        Click on "Forgot Password" on the login page and follow the instructions
+        sent to your email.
+      </div>
+    </div>
+    <div class="collapse bg-base-100 border border-base-300">
+      <input type="radio" name="my-accordion-1" />
+      <div class="collapse-title font-semibold">
+        How do I update my profile information?
+      </div>
+      <div class="collapse-content text-sm">
+        Go to "My Account" settings and select "Edit Profile" to make changes.
+      </div>
+    </div>
+    <div class="join join-vertical bg-base-100 w-full">
+      <div class="collapse collapse-arrow join-item border-base-300 border">
+        <input type="radio" name="my-accordion-4" checked="checked" />
+        <div class="collapse-title font-semibold">
+          How do I create an account?
+        </div>
+        <div class="collapse-content text-sm">
+          Click the "Sign Up" button in the top right corner and follow the
+          registration process.
+        </div>
+      </div>
+      <div class="collapse collapse-arrow join-item border-base-300 border">
+        <input type="radio" name="my-accordion-4" />
+        <div class="collapse-title font-semibold">
+          I forgot my password. What should I do?
+        </div>
+        <div class="collapse-content text-sm">
+          Click on "Forgot Password" on the login page and follow the
+          instructions sent to your email.
+        </div>
+      </div>
+      <div class="collapse collapse-arrow join-item border-base-300 border">
+        <input type="radio" name="my-accordion-4" />
+        <div class="collapse-title font-semibold">
+          How do I update my profile information?
+        </div>
+        <div class="collapse-content text-sm">
+          Go to "My Account" settings and select "Edit Profile" to make changes.
+        </div>
+      </div>
+    </div><div
+      class="collapse collapse-plus bg-base-100 border border-base-300"
+    >
+      <input type="radio" name="my-accordion-3" checked="checked" />
+      <div class="collapse-title font-semibold">
+        How do I create an account?
+      </div>
+      <div class="collapse-content text-sm">
+        Click the "Sign Up" button in the top right corner and follow the
+        registration process.
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-base-100 border border-base-300">
+      <input type="radio" name="my-accordion-3" />
+      <div class="collapse-title font-semibold">
+        I forgot my password. What should I do?
+      </div>
+      <div class="collapse-content text-sm">
+        Click on "Forgot Password" on the login page and follow the instructions
+        sent to your email.
+      </div>
+    </div>
+    <div class="collapse collapse-plus bg-base-100 border border-base-300">
+      <input type="radio" name="my-accordion-3" />
+      <div class="collapse-title font-semibold">
+        How do I update my profile information?
+      </div>
+      <div class="collapse-content text-sm">
+        Go to "My Account" settings and select "Edit Profile" to make changes.
+      </div>
+    </div>
+    <!-- Layout -->
+    <section>
+      <h2 class="text-2xl font-bold mb-4">Layout</h2>
+      <div class="space-y-6">
+        <div class="divider">Divider</div>
+        <div class="hero bg-base-200">
+          <div class="hero-content text-center">
+            <div class="max-w-md">
+              <h1 class="text-5xl font-bold">Hello there</h1>
+              <p class="py-6">
+                Provident cupiditate voluptatem et in. Quaerat fugiat ut
+                assumenda excepturi exercitationem quasi.
+              </p>
+              <button class="btn btn-primary">Get Started</button>
+            </div>
+          </div>
+        </div>
+        <div class="indicator">
+          <span class="indicator-item badge badge-secondary">new</span>
+          <button class="btn">Indicator</button>
+        </div>
+      </div>
+    </section>
+    <div class="stack">
+      <div class="card shadow-md bg-primary text-primary-content">
+        <div class="card-body">
+          <h2 class="card-title">Notification 1</h2>
+          <p>You have 3 unread messages.</p>
+        </div>
+      </div>
+      <div class="card shadow bg-primary text-primary-content">
+        <div class="card-body">
+          <h2 class="card-title">Notification 2</h2>
+          <p>You have 3 unread messages.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </MainLayout>
