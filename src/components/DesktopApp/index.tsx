@@ -27,6 +27,7 @@ export default function DesktopApp({ app }: DesktopAppProps) {
       class="desktopApp w-26 max-h-30 p-2 flex flex-col items-center justify-end cursor-pointer select-none rounded-box border-2 border-transparent active:border-base-200"
       onClick={handleClick}
       onDblClick={handleClick}
+      title={localizedName}
     >
       <div class="flex-shrink-0 flex items-center justify-center text-4xl h-14 w-14 overflow-hidden">
         {isImageUrl ? (
