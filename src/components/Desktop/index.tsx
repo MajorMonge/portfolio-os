@@ -23,20 +23,7 @@ import {
   isNotionPages,
 } from "@/services/notion";
 
-const defaultApplications: Application[] = [
-  {
-    id: "1",
-    name: "Sample App",
-    icon: "😍",
-    component: <div>Sample Component</div>,
-    title: "Sample Application",
-    resizable: true,
-    maximizable: true,
-    minimizable: true,
-    closable: true,
-    singleInstance: true,
-  },
-];
+const defaultApplications: Application[] = [];
 
 export default function Desktop() {
   const [applications, setApplications] =
