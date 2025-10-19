@@ -1,5 +1,6 @@
-import { h, type JSX } from 'preact';
-import { useEffect } from 'preact/hooks';
+import { h, type JSX } from "preact";
+import { useEffect } from "preact/hooks";
+import { useTranslation } from "@/i18n";
 
 interface WindowTopbarProps {
   title: string | JSX.Element;
@@ -14,12 +15,9 @@ export default function WindowTopbar({
   onMouseDown,
   onClose,
   onMinimize,
-  onMaximize
+  onMaximize,
 }: WindowTopbarProps) {
-
-  useEffect(() => {
-    console.log(onClose, onMinimize, onMaximize);
-  }, [onClose, onMinimize, onMaximize]);
+  const { t } = useTranslation();
 
   return (
     <div
@@ -27,13 +25,16 @@ export default function WindowTopbar({
       onMouseDown={onMouseDown}
     >
       <div class="flex items-center min-w-0 flex-1 select-none">
-        {
-          typeof title === 'string' ? (
-            <span title={title} class="text-base font-medium text-base-content truncate pl-2 py-2 topbar-title">{title}</span>
-          ) : (
-            title
-          )
-        }
+        {typeof title === "string" ? (
+          <span
+            title={title}
+            class="text-base font-medium text-base-content truncate pl-2 py-2 topbar-title"
+          >
+            {title}
+          </span>
+        ) : (
+          title
+        )}
       </div>
 
       <div class="flex items-center gap-1 p-2 topbar-buttons">
@@ -41,11 +42,13 @@ export default function WindowTopbar({
           class="btn btn-sm btn-square"
           onClick={(e) => {
             e.stopPropagation();
+            onMinimize && onMinimize();
           }}
           onMouseDown={(e) => {
             e.stopPropagation();
           }}
           type="button"
+          title={t("window.minimize")}
         >
           −
         </button>
@@ -58,9 +61,9 @@ export default function WindowTopbar({
           }}
           onMouseDown={(e) => {
             e.stopPropagation();
-            e.stopPropagation();
           }}
           type="button"
+          title={t("window.maximize")}
         >
           □
         </button>
@@ -68,11 +71,13 @@ export default function WindowTopbar({
           class="btn btn-sm btn-error btn-square"
           onClick={(e) => {
             e.stopPropagation();
+            onClose && onClose();
           }}
           onMouseDown={(e) => {
             e.stopPropagation();
           }}
           type="button"
+          title={t("window.close")}
         >
           ×
         </button>
