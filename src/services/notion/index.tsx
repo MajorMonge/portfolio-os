@@ -162,7 +162,7 @@ function pageToApplication(page: PageObjectResponse): Application {
     ) {
       const richTextItem = appContentProperty.rich_text[0];
       if (richTextItem.href !== null && richTextItem.href !== undefined) {
-        content = richTextItem.href;
+        content = richTextItem;
       } else {
         content = richTextItem.plain_text || "";
       }
