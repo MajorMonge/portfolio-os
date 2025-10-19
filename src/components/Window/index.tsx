@@ -13,6 +13,7 @@ interface WindowProps {
   height?: number;
   stackPosition?: number;
   minimized?: boolean;
+  isActive?: boolean;
   onClose?: () => void;
   onMinimize?: () => void;
   onMaximize?: () => void;
@@ -36,6 +37,7 @@ export default function Window({
   height = 300,
   stackPosition = 500,
   minimized = false,
+  isActive = false,
   onClose,
   onMinimize,
   onMaximize,
@@ -253,6 +255,7 @@ export default function Window({
       {visibleTopbar && (
         <WindowTopbar
           title={title}
+          isActive={isActive}
           onMouseDown={handleTopbarMouseDown}
           onClose={onClose}
           onMinimize={onMinimize}
