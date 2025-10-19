@@ -14,6 +14,9 @@ export default {
         localeSelector: {
           tooltip: 'Select Language',
         },
+        themeSelector: {
+          tooltip: 'Select Theme',
+        },
       },
     }
   }

@@ -2,8 +2,11 @@ import { h } from "preact";
 import { $themeStore } from "@/store/ThemeStore";
 import { useEffect } from "preact/hooks";
 import { useStore } from "@nanostores/preact";
+import { useTranslation } from "@/i18n";
 
 export default function ThemeSelector() {
+  const { t } = useTranslation();
+
   const themes = [
     "win95",
     "light",
@@ -54,7 +57,8 @@ export default function ThemeSelector() {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost btn-square my-auto"
+        className="btn btn-ghost btn-square my-auto tooltip"
+        data-tip={t("ui.taskbar.themeSelector.tooltip")}
       >
         🎨
       </div>
