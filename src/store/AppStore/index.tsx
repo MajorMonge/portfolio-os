@@ -3,6 +3,7 @@ import { atom } from "nanostores";
 
 export const $appStore = atom<Application[]>([]);
 export const $taskbarOrder = atom<Application[]>([]);
+export const $focusOrder = atom<string[]>([]);
 
 const BASE_ZINDEX = 100;
 
@@ -11,39 +12,38 @@ function generateInstanceId(): string {
 }
 
 export function getAppZIndex(instanceId: string): number {
-  const apps = $appStore.get();
-  const index = apps.findIndex((a) => a.instanceId === instanceId);
+  const focusOrder = $focusOrder.get();
+  const index = focusOrder.indexOf(instanceId);
   if (index === -1) return BASE_ZINDEX;
   return BASE_ZINDEX + index;
 }
 
 export function getAppsWithZIndex(): Array<Application & { zIndex: number }> {
   const apps = $appStore.get();
-  return apps.map((app, index) => ({
+  return apps.map((app) => ({
     ...app,
-    zIndex: BASE_ZINDEX + index,
+    zIndex: getAppZIndex(app.instanceId!),
   }));
 }
 
 export function bringAppToFront(instanceId: string) {
-  const apps = $appStore.get();
-  const appIndex = apps.findIndex((a) => a.instanceId === instanceId);
+  const focusOrder = $focusOrder.get();
+  const currentIndex = focusOrder.indexOf(instanceId);
 
-  if (appIndex === -1) {
+  if (currentIndex === -1) {
     return;
   }
 
-  if (appIndex === apps.length - 1) {
+  if (currentIndex === focusOrder.length - 1) {
     return;
   }
 
-  const app = apps[appIndex];
-  const newApps = [
-    ...apps.slice(0, appIndex),
-    ...apps.slice(appIndex + 1),
-    app,
+  const newFocusOrder = [
+    ...focusOrder.slice(0, currentIndex),
+    ...focusOrder.slice(currentIndex + 1),
+    instanceId,
   ];
-  $appStore.set(newApps);
+  $focusOrder.set(newFocusOrder);
 }
 
 export function openApp(app: Application) {
@@ -67,6 +67,7 @@ export function openApp(app: Application) {
 
   const apps = $appStore.get();
   const taskbarOrder = $taskbarOrder.get();
+  const focusOrder = $focusOrder.get();
   const existingApp = apps.find((a) => a.id === app.id && app.singleInstance);
 
   if (app.singleInstance && existingApp) {
@@ -84,16 +85,18 @@ export function openApp(app: Application) {
   };
 
   $appStore.set([...apps, newApp]);
-
   $taskbarOrder.set([...taskbarOrder, newApp]);
+  $focusOrder.set([...focusOrder, newApp.instanceId]);
 }
 
 export function closeApp(instanceId: string) {
   const apps = $appStore.get();
   const taskbarOrder = $taskbarOrder.get();
+  const focusOrder = $focusOrder.get();
 
   $appStore.set(apps.filter((a) => a.instanceId !== instanceId));
   $taskbarOrder.set(taskbarOrder.filter((a) => a.instanceId !== instanceId));
+  $focusOrder.set(focusOrder.filter((id) => id !== instanceId));
 }
 
 export function minimizeApp(instanceId: string) {
@@ -106,19 +109,16 @@ export function minimizeApp(instanceId: string) {
 
 export function restoreApp(instanceId: string) {
   const apps = $appStore.get();
-  const appIndex = apps.findIndex((a) => a.instanceId === instanceId);
+  const app = apps.find((a) => a.instanceId === instanceId);
 
-  if (appIndex === -1) return;
+  if (!app) return;
 
-  const app = apps[appIndex];
-  const restoredApp = { ...app, minimized: false };
-
-  const newApps = [
-    ...apps.slice(0, appIndex),
-    ...apps.slice(appIndex + 1),
-    restoredApp,
-  ];
-  $appStore.set(newApps);
+  const updatedApps = apps.map((a) =>
+    a.instanceId === instanceId ? { ...a, minimized: false } : a
+  );
+  $appStore.set(updatedApps);
+  
+  bringAppToFront(instanceId);
 }
 
 export function toggleMinimize(instanceId: string) {
