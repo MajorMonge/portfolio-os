@@ -3,6 +3,7 @@ import TaskbarApp from "../TaskbarApp";
 import {
   $appStore,
   $taskbarOrder,
+  $focusOrder,
   bringAppToFront,
   closeApp,
   toggleMinimize,
@@ -19,6 +20,7 @@ interface TaskbarProps {
 export default function Taskbar({ position = "bottom" }: TaskbarProps) {
   const apps = useStore($appStore);
   const taskbarApps = useStore($taskbarOrder);
+  const focusOrder = useStore($focusOrder);
 
   const getPositionClasses = () => {
     switch (position) {
@@ -40,30 +42,30 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
       class={`min-w-[80%] absolute ${getPositionClasses()} z-[999] flex gap-1 items-center justify-start bg-base-200 rounded-box mx-4 my-2 px-4 border-2 border-base-100 shadow-[1px_0px_30px_-15px_rgba(0,0,0,0.75)] w-auto panel taskbar`}
     >
       <div className={"basis-4/5 grow  flex gap-2"}>
-        {taskbarApps.map((app) => (
-          <TaskbarApp
-            key={app.instanceId}
-            icon={app.icon}
-            onClick={() => {
-              const currentApp = apps.find(
-                (a) => a.instanceId === app.instanceId
-              );
-              if (!currentApp) return;
+        {taskbarApps.map((app) => {
+          const currentApp = apps.find((a) => a.instanceId === app.instanceId);
+          const isTopMostApp = focusOrder[focusOrder.length - 1] === app.instanceId;
+          const isActive = isTopMostApp && !currentApp?.minimized;
 
-              if (currentApp.minimized) {
-                toggleMinimize(app.instanceId!);
-              } else if (app.instanceId === apps[apps.length - 1]?.instanceId) {
-                toggleMinimize(app.instanceId!);
-              } else {
-                bringAppToFront(app.instanceId!);
-              }
-            }}
-            isActive={
-              app.instanceId === apps[apps.length - 1]?.instanceId &&
-              !apps.find((a) => a.instanceId === app.instanceId)?.minimized
-            }
-          />
-        ))}
+          return (
+            <TaskbarApp
+              key={app.instanceId}
+              icon={app.icon}
+              onClick={() => {
+                if (!currentApp) return;
+
+                if (currentApp.minimized) {
+                  toggleMinimize(app.instanceId!);
+                } else if (isTopMostApp) {
+                  toggleMinimize(app.instanceId!);
+                } else {
+                  bringAppToFront(app.instanceId!);
+                }
+              }}
+              isActive={isActive}
+            />
+          );
+        })}
       </div>
       <div
         className={
