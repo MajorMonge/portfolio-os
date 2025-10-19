@@ -18,4 +18,6 @@ export interface Application {
   desktopApp?: boolean;
   instanceId?: string;
   minimized?: boolean;
+  isExternalLink?: boolean;
+  externalTarget?: string;
 }

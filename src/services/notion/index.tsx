@@ -161,7 +161,7 @@ function pageToApplication(page: PageObjectResponse): Application {
       appContentProperty.rich_text.length > 0
     ) {
       const richTextItem = appContentProperty.rich_text[0];
-      if (richTextItem.href) {
+      if (richTextItem.href !== null && richTextItem.href !== undefined) {
         content = richTextItem.href;
       } else {
         content = richTextItem.plain_text || "";
@@ -180,6 +180,8 @@ function pageToApplication(page: PageObjectResponse): Application {
     singleInstance: false,
     startMenuApp: false,
     desktopApp: true,
+    isExternalLink: false,
+    externalTarget: "_blank",
     width: undefined,
     height: undefined,
     x: undefined,
@@ -215,6 +217,8 @@ function pageToApplication(page: PageObjectResponse): Application {
     singleInstance: appConfig.singleInstance,
     startMenuApp: appConfig.startMenuApp,
     desktopApp: appConfig.desktopApp,
+    isExternalLink: appConfig.isExternalLink,
+    externalTarget: appConfig.externalTarget,
     width: appConfig.width,
     height: appConfig.height,
     x: appConfig.x,

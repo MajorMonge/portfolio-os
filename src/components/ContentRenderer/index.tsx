@@ -6,15 +6,7 @@ interface ContentRendererProps {
 }
 
 export default function ContentRenderer({ content }: ContentRendererProps) {
-  const isUrl =
-    typeof content === "string" &&
-    (content.startsWith("http://") || content.startsWith("https://"));
-
-  if (isUrl) {
-    return <iframe src={content as string} class="w-full h-full border-none" />;
-  }
-
-  if (typeof content !== "string" && content.href) {
+  if (typeof content !== "string" && content.href !== null && content.href !== undefined) {
     return <iframe src={content.href} class="w-full h-full border-none" />;
   }
 

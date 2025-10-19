@@ -47,6 +47,24 @@ export function bringAppToFront(instanceId: string) {
 }
 
 export function openApp(app: Application) {
+  console.log("Opening app:", app);
+  if (app.isExternalLink) {
+    const content = app.component?.props?.content;
+    let url: string | undefined;
+
+    if (typeof content === 'string') {
+      url = content;
+    } else if (content?.href) {
+      url = content.href;
+    }
+
+    if (url) {
+      const target = app.externalTarget || '_blank';
+      window.open(url, target, 'noopener,noreferrer');
+    }
+    return;
+  }
+
   const apps = $appStore.get();
   const taskbarOrder = $taskbarOrder.get();
   const existingApp = apps.find((a) => a.id === app.id && app.singleInstance);
