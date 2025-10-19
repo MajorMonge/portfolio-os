@@ -8,11 +8,13 @@ import { useEffect, useState } from "preact/hooks";
 import { useStore } from "@nanostores/preact";
 import {
   $appStore,
+  $focusOrder,
   bringAppToFront,
   closeApp,
   minimizeApp,
   updateAppPosition,
   updateAppSize,
+  getAppZIndex,
 } from "@/store/AppStore";
 import { $localeStore } from "@/i18n";
 import { getLocalizedAppName } from "@/helpers/appLocalization";
@@ -35,9 +37,8 @@ export default function Desktop() {
   >("bottom");
 
   const apps = useStore($appStore);
+  const focusOrder = useStore($focusOrder);
   const locale = useStore($localeStore);
-
-  const BASE_ZINDEX = 100;
 
   useEffect(() => {
     const fetchApps = async () => {
@@ -59,7 +60,7 @@ export default function Desktop() {
 
       <DesktopGrid apps={applications} taskbarFit={taskbarPosition} />
 
-      {apps.map((app, index) => (
+      {apps.map((app) => (
         <Window
           key={app.instanceId}
           title={getLocalizedAppName(app)}
@@ -69,7 +70,7 @@ export default function Desktop() {
           height={app.height}
           resizable={app.resizable}
           minimized={app.minimized}
-          stackPosition={BASE_ZINDEX + index}
+          stackPosition={getAppZIndex(app.instanceId!)}
           onClose={() => closeApp(app.instanceId!)}
           onMinimize={
             app.minimizable ? () => minimizeApp(app.instanceId!) : undefined
