@@ -24,16 +24,16 @@ export default function DesktopApp({ app }: DesktopAppProps) {
 
   return (
     <div
-      class="desktopApp w-26 max-h-26 p-2 flex flex-col items-center justify-end cursor-pointer select-none rounded-box border-2 border-transparent active:border-base-200"
+      class="desktopApp w-26 max-h-30 p-2 flex flex-col items-center justify-end cursor-pointer select-none rounded-box border-2 border-transparent active:border-base-200"
       onClick={handleClick}
       onDblClick={handleClick}
     >
-      <div class="flex-shrink-0 flex items-end justify-center text-4xl object-contain h-16 w-16">
+      <div class="flex-shrink-0 flex items-center justify-center text-4xl h-14 w-14 overflow-hidden">
         {isImageUrl ? (
           <img
             src={app.icon as string}
             alt={localizedName}
-            class="max-w-full max-h-full object-contain"
+            class="w-14 h-14 object-contain"
           />
         ) : (
           app.icon

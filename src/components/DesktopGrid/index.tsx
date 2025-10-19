@@ -26,7 +26,7 @@ export default function DesktopGrid({ apps, taskbarFit }: DesktopGridProps) {
   return (
     <div className={`w-full h-full ${getPositionClasses()} flex  flex-row`}>
       <div
-        className={`w-full h-full p-4 grid grid-rows-[repeat(auto-fill,minmax(6rem,1fr))] auto-cols-max gap-2 grid-flow-col content-start justify-items-start`}
+        className={`w-full h-full p-4 grid grid-rows-[repeat(auto-fill,minmax(7rem,1fr))] auto-cols-max gap-2 grid-flow-col content-start justify-items-start`}
       >
         {apps && apps.map((app) => <DesktopApp key={app.id} app={app} />)}
       </div>
