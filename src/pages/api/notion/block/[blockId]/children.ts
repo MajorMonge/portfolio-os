@@ -1,0 +1,33 @@
+import type { APIRoute } from "astro";
+
+import { getBlockChildren } from "@/connections/notion";
+
+export const prerender = false;
+
+export const GET: APIRoute = async ({ params }) => {
+  try {
+    const { blockId } = params;
+    if (!blockId) {
+      return new Response(JSON.stringify({ error: "Block ID is required" }), {
+        status: 400,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+    const data = await getBlockChildren(blockId);
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Failed to fetch data" }), {
+      status: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+};
