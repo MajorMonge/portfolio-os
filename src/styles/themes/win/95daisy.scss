@@ -134,6 +134,10 @@
     font-size: 1rem;
     line-height: 1.6;
 
+    body {
+      background-color: var(--color-accent) !important;
+    }
+
     .btn,
     button,
     input[type="reset"],
@@ -544,6 +548,7 @@
         letter-spacing: 0;
         margin-right: 24px;
         padding: 0px !important;
+        padding-left: 0.25rem !important;
       }
 
       .topbar-buttons {
@@ -558,6 +563,11 @@
 
         }
       }
+    }
+
+    .window-inner {
+      height: calc(100% - 24px) !important;
+      padding-bottom: 0.5rem !important;
     }
 
     input[type="range"]::-moz-range-track {
@@ -592,9 +602,15 @@
       color: transparent;
     }
 
-    .toolbar {
+    .taskbar {
       width: 100% !important;
       margin: 0px !important;
+
+      .app-icon {
+        .app-active {
+          box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey !important;
+        }
+      }
     }
 
     .collapse {
@@ -669,6 +685,11 @@
           }
         }
       }
+    }
+
+    .inverted-panel {
+      border-radius: 0px !important;
+      box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
     }
   }
 }
