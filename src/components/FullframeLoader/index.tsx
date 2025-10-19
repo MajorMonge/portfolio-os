@@ -32,7 +32,7 @@ export default function FullframeLoader({
         fadeOut ? "opacity-0" : "opacity-100"
       }`}
     >
-      <span class="loading loading-spinner loading-lg"></span>
+      <span class="loading loading-spinner loading-xl text-secondary-content"></span>
     </div>
   );
 }
