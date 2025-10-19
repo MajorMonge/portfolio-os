@@ -138,6 +138,7 @@
 
     body {
       background-color: var(--color-accent) !important;
+      background-image: linear-gradient(var(--color-accent), var(--color-accent)) !important;
     }
 
     .btn,
