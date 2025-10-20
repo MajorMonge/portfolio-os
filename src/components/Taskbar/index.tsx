@@ -25,46 +25,14 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
   const getPositionConfig = () => {
     switch (position) {
       case "top":
-        return {
-          classes: "top-0 h-15 flex-row",
-          style: {
-            left: "50%",
-            transform: "translateX(-50%)",
-            minWidth: "min(95vw, 50vw)",
-            maxWidth: "calc(100vw - 2rem)",
-          },
-        };
+        return "top-0 left-1/2 -translate-x-1/2 h-15 flex-row my-2 min-w-[min(95vw,50vw)] max-w-[calc(100vw-2rem)]";
       case "left":
-        return {
-          classes: "left-0 w-15 flex-col",
-          style: {
-            top: "50%",
-            transform: "translateY(-50%)",
-            minHeight: "min(95vh, 50vh)",
-            maxHeight: "calc(100vh - 2rem)",
-          },
-        };
+        return "left-0 top-1/2 -translate-y-1/2 w-15 flex-col mx-2 min-h-[min(95vh,50vh)] max-h-[calc(100vh-2rem)]";
       case "right":
-        return {
-          classes: "right-0 w-15 flex-col",
-          style: {
-            top: "50%",
-            transform: "translateY(-50%)",
-            minHeight: "min(95vh, 50vh)",
-            maxHeight: "calc(100vh - 2rem)",
-          },
-        };
+        return "right-0 top-1/2 -translate-y-1/2 w-15 flex-col mx-2 min-h-[min(95vh,50vh)] max-h-[calc(100vh-2rem)]";
       case "bottom":
       default:
-        return {
-          classes: "bottom-0 h-15 flex-row",
-          style: {
-            left: "50%",
-            transform: "translateX(-50%)",
-            minWidth: "min(95vw, 50vw)",
-            maxWidth: "calc(100vw - 2rem)",
-          },
-        };
+        return "bottom-0 left-1/2 -translate-x-1/2 h-15 flex-row my-2 min-w-[min(95vw,50vw)] max-w-[calc(100vw-2rem)]";
     }
   };
 
@@ -73,11 +41,16 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
 
   return (
     <div
-      class={`absolute ${config.classes} z-[999] flex items-center justify-between bg-base-200 rounded-box my-2 shadow-[1px_0px_30px_-15px_rgba(0,0,0,0.75)] panel taskbar`}
-      style={config.style}
+      class={`absolute ${config} z-[999] flex items-center justify-between bg-base-200 rounded-box shadow-[1px_0px_30px_-15px_rgba(0,0,0,0.75)] panel taskbar ${
+        isHorizontal ? "taskbar-horizontal" : "taskbar-vertical"
+      }`}
     >
       <div
-        className={`flex-1 ${isHorizontal ? 'min-w-0 overflow-x-auto' : 'min-h-0 overflow-y-auto'} flex gap-2 px-4 ${isHorizontal ? 'flex-row' : 'flex-col'}`}
+        className={`w-full flex-1 ${
+          isHorizontal
+            ? "min-w-0 overflow-x-auto justify-start"
+            : "min-h-0 overflow-y-auto items-center pt-2"
+        } flex gap-2 ${isHorizontal ? "flex-row" : "flex-col"}`}
         style={{ scrollbarWidth: "thin" }}
       >
         {taskbarApps.map((app) => {
@@ -106,10 +79,22 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
           );
         })}
       </div>
-      <div className="flex-shrink-0 shadow-sm h-full px-4 flex flex-wrap gap-2 items-center align-center justify-center rounded-box inverted-panel">
-        <LocaleSelector />
-        <ThemeSelector />
-        <TaskbarClock />
+      <div class={` taskbar-widgets  ${
+            isHorizontal
+              ? "h-full mr-2 py-2"
+              : "w-full "
+          }`}>
+        <div
+          className={`shadow-sm flex gap-2 bg-primary/25 glass items-center justify-center rounded-box inverted-panel ${
+            isHorizontal
+              ? "h-full px-4 flex-row flex-wrap"
+              : "py-4 flex-col flex-shrink-0"
+          }`}
+        >
+          <LocaleSelector />
+          <ThemeSelector />
+          <TaskbarClock position={position} />
+        </div>
       </div>
     </div>
   );
