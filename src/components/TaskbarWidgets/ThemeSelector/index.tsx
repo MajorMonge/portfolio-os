@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { $themeStore } from "@/store/ThemeStore";
+import { $themeStore, setTheme, themes } from "@/store/ThemeStore";
 import { useEffect } from "preact/hooks";
 import { useStore } from "@nanostores/preact";
 import { useTranslation } from "@/i18n";
@@ -7,50 +7,11 @@ import { useTranslation } from "@/i18n";
 export default function ThemeSelector() {
   const { t } = useTranslation();
 
-  const themes = [
-    "win95",
-    "light",
-    "dark",
-    "cupcake",
-    "bumblebee",
-    "emerald",
-    "corporate",
-    "synthwave",
-    "retro",
-    "cyberpunk",
-    "valentine",
-    "halloween",
-    "garden",
-    "forest",
-    "aqua",
-    "lofi",
-    "pastel",
-    "fantasy",
-    "wireframe",
-    "black",
-    "luxury",
-    "dracula",
-    "cmyk",
-    "autumn",
-    "business",
-    "acid",
-    "lemonade",
-    "night",
-    "coffee",
-    "winter",
-    "dim",
-    "nord",
-    "sunset",
-  ];
   const activeTheme = useStore($themeStore);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", activeTheme);
   }, [activeTheme]);
-
-  const setActiveTheme = (theme: string) => {
-    $themeStore.set(theme);
-  };
 
   return (
     <div className="dropdown dropdown-top flex align-center justify-center">
@@ -76,7 +37,7 @@ export default function ThemeSelector() {
               }`}
               aria-label={theme}
               value={theme}
-              onChange={() => setActiveTheme(theme)}
+              onChange={() => setTheme(theme)}
               checked={activeTheme === theme}
             />
           </li>
