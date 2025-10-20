@@ -11,10 +11,16 @@ import "@styles/themes/win/95daisy.scss";
     <meta name="generator" content={Astro.generator} />
 
     <title>Astro</title>
-    <script is:inline>
-      const storedTheme = localStorage.getItem("themeStore") || "win95";
-      document.documentElement.setAttribute("data-theme", storedTheme);
-      document.documentElement.setAttribute("data-language", "pt-BR");
+    <script>
+      import { $localeStore } from "@/i18n";
+      import { $themeStore } from "@/store/ThemeStore";
+      $themeStore.subscribe((theme) => {
+        document.documentElement.setAttribute("data-theme", theme);
+      });
+
+      $localeStore.subscribe((locale) => {
+        document.documentElement.setAttribute("lang", locale);
+      });
     </script>
   </head>
   <body class="min-h-screen bg-linear-to-bl from-primary to-secondary">
