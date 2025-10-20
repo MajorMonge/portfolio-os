@@ -70,6 +70,120 @@ export default function Window({
   const windowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    let newWidth = width;
+    let newHeight = height;
+    let newX = initialX;
+    let newY = initialY;
+    let needsUpdate = false;
+
+    if (width > screenWidth) {
+      newWidth = screenWidth;
+      needsUpdate = true;
+    }
+    if (height > screenHeight) {
+      newHeight = screenHeight;
+      needsUpdate = true;
+    }
+
+    if (initialX + newWidth > screenWidth) {
+      newX = Math.max(0, screenWidth - newWidth);
+      needsUpdate = true;
+    }
+    if (initialY + newHeight > screenHeight) {
+      newY = Math.max(0, screenHeight - newHeight);
+      needsUpdate = true;
+    }
+    if (initialX < 0) {
+      newX = 0;
+      needsUpdate = true;
+    }
+    if (initialY < 0) {
+      newY = 0;
+      needsUpdate = true;
+    }
+
+    if (needsUpdate) {
+      if (newWidth !== width || newHeight !== height) {
+        setSize({ width: newWidth, height: newHeight });
+        onSizeChange && onSizeChange(newWidth, newHeight);
+      }
+      if (newX !== initialX || newY !== initialY) {
+        setPosition({ x: newX, y: newY });
+        onPositionChange && onPositionChange(newX, newY);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setSize((currentSize) => {
+        setPosition((currentPosition) => {
+          const screenWidth = window.innerWidth;
+          const screenHeight = window.innerHeight;
+
+          let newWidth = currentSize.width;
+          let newHeight = currentSize.height;
+          let newX = currentPosition.x;
+          let newY = currentPosition.y;
+
+          if (currentSize.width > screenWidth) {
+            newWidth = screenWidth;
+          }
+          if (currentSize.height > screenHeight) {
+            newHeight = screenHeight;
+          }
+
+          if (currentPosition.x + newWidth > screenWidth) {
+            newX = Math.max(0, screenWidth - newWidth);
+          }
+          if (currentPosition.y + newHeight > screenHeight) {
+            newY = Math.max(0, screenHeight - newHeight);
+          }
+          if (currentPosition.x < 0) {
+            newX = 0;
+          }
+          if (currentPosition.y < 0) {
+            newY = 0;
+          }
+
+          if (newX !== currentPosition.x || newY !== currentPosition.y) {
+            onPositionChange && onPositionChange(newX, newY);
+            return { x: newX, y: newY };
+          }
+          return currentPosition;
+        });
+
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+        let newWidth = currentSize.width;
+        let newHeight = currentSize.height;
+
+        if (currentSize.width > screenWidth) {
+          newWidth = screenWidth;
+        }
+        if (currentSize.height > screenHeight) {
+          newHeight = screenHeight;
+        }
+
+        if (newWidth !== currentSize.width || newHeight !== currentSize.height) {
+          onSizeChange && onSizeChange(newWidth, newHeight);
+          return { width: newWidth, height: newHeight };
+        }
+        return currentSize;
+      });
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [onPositionChange, onSizeChange]);
+
+  useEffect(() => {
     const handleMove = (clientX: number, clientY: number) => {
       if (isDragging) {
         const newX = clientX - dragOffset.x;
@@ -324,8 +438,8 @@ export default function Window({
       )}
 
       {bodyDrag && (
-        <div 
-          class="absolute inset-0" 
+        <div
+          class="absolute inset-0"
           onMouseDown={handleTopbarMouseDown}
           onTouchStart={handleTopbarTouchStart}
         />
