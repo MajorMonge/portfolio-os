@@ -32,7 +32,7 @@ export default function TaskbarClock({}) {
 
   return (
     <div class="flex flex-col items-center justify-center">
-      <span className="countdown text-xl text-base-content">
+      <span className="countdown text-xl text-primary">
         <span
           style={{ "--value": hours }}
           aria-live="polite"
@@ -57,7 +57,7 @@ export default function TaskbarClock({}) {
           {seconds}
         </span>
       </span>
-      <span class="text-sm text-base-content mt-1">
+      <span class="text-sm text-base-content/70 mt-1">
         {date.toLocaleDateString(activeLocale, {
           weekday: "short",
           year: "numeric",
