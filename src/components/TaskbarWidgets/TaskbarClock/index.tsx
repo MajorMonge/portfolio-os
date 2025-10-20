@@ -31,7 +31,7 @@ export default function TaskbarClock({}) {
   }, []);
 
   return (
-    <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-center justify-center taskbar-clock">
       <span className="countdown text-xl text-primary">
         <span
           style={{ "--value": hours }}
