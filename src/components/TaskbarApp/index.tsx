@@ -17,8 +17,8 @@ export default function TaskbarApp({
 
   return (
     <button
-      class={`app-icon btn btn-ghost rounded-box flex items-center justify-center h-full text-2xl p-2 text-center relative ${
-        isActive ? "btn-active" : ""
+      class={`app-icon btn btn-ghost rounded-box flex items-center justify-center aspect-square w-12 h-12 text-2xl p-2 text-center relative flex-shrink-0 ${
+        isActive ? "btn-active glass" : ""
       }`}
       onClick={onClick}
     >
@@ -34,11 +34,11 @@ export default function TaskbarApp({
         )}
       </div>
       {isActive ? (
-        <span class="app-active absolute bottom-[0.5px] left-1/2 transform -translate-x-1/2 w-2 h-2 bg-accent rounded-box"></span>
+        <span class="app-active absolute bottom-[1.5px] left-1/2 transform -translate-x-1/2 w-1 h-1 bg-accent rounded-box"></span>
       ) : (
         <span
           class={
-            "app-inactive absolute bottom-[0.5px] left-1/2 transform -translate-x-1/2 w-2 h-2 bg-neutral rounded-box"
+            "app-inactive absolute bottom-[1.5px] left-1/2 transform -translate-x-1/2 w-1 h-1 bg-neutral-content/25 rounded-box"
           }
         ></span>
       )}
