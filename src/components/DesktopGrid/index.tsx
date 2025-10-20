@@ -11,15 +11,15 @@ export default function DesktopGrid({ apps, taskbarFit }: DesktopGridProps) {
   const getPositionClasses = () => {
     switch (taskbarFit) {
       case "top":
-        return "top-0 left-0 w-full h-[calc(100%-3.75rem)] pt-15";
+        return "top-0 left-0 w-full h-[calc(100%-4.75rem)]";
       case "left":
-        return "left-0 top-0 h-full w-[calc(100%-3.75rem)] pl-15";
+        return "left-0 top-0 h-full w-[calc(100%-4.75rem)]";
       case "right":
-        return "right-0 top-0 h-full w-[calc(100%-3.75rem)] pr-15";
+        return "right-0 top-0 h-full w-[calc(100%-4.75rem)]";
       case "bottom":
-        return "bottom-0 left-0 w-full h-[calc(100%-3.75rem)] pb-15";
+        return "bottom-0 left-0 w-full h-[calc(100%-4.75rem)]";
       default:
-        return "bottom-0 left-0 w-full h-[calc(100%-3.75rem)] pb-15";
+        return "bottom-0 left-0 w-full h-[calc(100%-4.75rem)]";
     }
   };
 
