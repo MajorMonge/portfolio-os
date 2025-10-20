@@ -9,10 +9,6 @@ export default function ThemeSelector() {
 
   const activeTheme = useStore($themeStore);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", activeTheme);
-  }, [activeTheme]);
-
   return (
     <div className="dropdown dropdown-top flex align-center justify-center">
       <div
