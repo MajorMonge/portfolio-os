@@ -141,6 +141,12 @@
       background-image: linear-gradient(var(--color-accent), var(--color-accent)) !important;
     }
 
+    .glass {
+      background-color: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
     .btn,
     button,
     input[type="reset"],
@@ -616,8 +622,33 @@
     }
 
     .taskbar {
-      width: 100% !important;
-      margin: 0px !important;
+
+      &.taskbar-vertical {
+        margin: 0px !important;
+        height: 100% !important;
+        max-height: 100% !important;
+      }
+
+      &.taskbar-horizontal {
+        margin: 0px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .taskbar-widgets {
+        padding: 0px !important;
+        margin: 0px !important;
+
+        .taskbar-clock {
+          .countdown {
+            color: var(--color-base-content) !important;
+
+            span {
+            color: var(--color-base-content) !important;
+            }
+          }
+        }
+      }
 
       .app-icon {
         .app-active {
@@ -625,11 +656,6 @@
         }
       }
 
-      .taskbar-clock {
-        .countdown {
-          color: var(--color-base-content) !important;
-        }
-      }
     }
 
     .collapse {
