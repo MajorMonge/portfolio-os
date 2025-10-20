@@ -70,10 +70,10 @@ export default function Window({
   const windowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMove = (clientX: number, clientY: number) => {
       if (isDragging) {
-        const newX = e.clientX - dragOffset.x;
-        const newY = e.clientY - dragOffset.y;
+        const newX = clientX - dragOffset.x;
+        const newY = clientY - dragOffset.y;
 
         const screenWidth = window.innerWidth;
         const screenHeight = window.innerHeight;
@@ -94,8 +94,8 @@ export default function Window({
       }
 
       if (isResizing) {
-        const deltaX = e.clientX - resizeStart.x;
-        const deltaY = e.clientY - resizeStart.y;
+        const deltaX = clientX - resizeStart.x;
+        const deltaY = clientY - resizeStart.y;
 
         let newWidth = resizeStart.width;
         let newHeight = resizeStart.height;
@@ -142,7 +142,18 @@ export default function Window({
       }
     };
 
-    const handleMouseUp = () => {
+    const handleMouseMove = (e: MouseEvent) => {
+      handleMove(e.clientX, e.clientY);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        e.preventDefault();
+        handleMove(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
+    const handleEnd = () => {
       if (isDragging && onPositionChange) {
         onPositionChange(position.x, position.y);
       }
@@ -157,14 +168,26 @@ export default function Window({
       setIsResizing(false);
     };
 
+    const handleMouseUp = () => {
+      handleEnd();
+    };
+
+    const handleTouchEnd = () => {
+      handleEnd();
+    };
+
     if (isDragging || isResizing) {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener("touchmove", handleTouchMove, { passive: false });
+      document.addEventListener("touchend", handleTouchEnd);
     }
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
       document.body.style.cursor = "default";
     };
   }, [
@@ -191,6 +214,20 @@ export default function Window({
     movable && setIsDragging(true);
   };
 
+  const handleTopbarTouchStart = (e: TouchEvent) => {
+    if (!windowRef.current || e.touches.length === 0) return;
+
+    onMouseDown && onMouseDown();
+
+    const rect = windowRef.current.getBoundingClientRect();
+    const touch = e.touches[0];
+    setDragOffset({
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    });
+    movable && setIsDragging(true);
+  };
+
   const handleResizeMouseDown = (e: MouseEvent, direction: ResizeDirection) => {
     e.preventDefault();
     e.stopPropagation();
@@ -203,6 +240,28 @@ export default function Window({
     setResizeStart({
       x: e.clientX,
       y: e.clientY,
+      width: size.width,
+      height: size.height,
+      startX: position.x,
+      startY: position.y,
+      direction,
+    });
+    setIsResizing(true);
+  };
+
+  const handleResizeTouchStart = (e: TouchEvent, direction: ResizeDirection) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    onMouseDown && onMouseDown();
+
+    if (!windowRef.current || e.touches.length === 0) return;
+
+    const touch = e.touches[0];
+    const rect = windowRef.current.getBoundingClientRect();
+    setResizeStart({
+      x: touch.clientX,
+      y: touch.clientY,
       width: size.width,
       height: size.height,
       startX: position.x,
@@ -257,6 +316,7 @@ export default function Window({
           title={title}
           isActive={isActive}
           onMouseDown={handleTopbarMouseDown}
+          onTouchStart={handleTopbarTouchStart}
           onClose={onClose}
           onMinimize={onMinimize}
           onMaximize={onMaximize || toggleWindowFullscreen}
@@ -264,7 +324,11 @@ export default function Window({
       )}
 
       {bodyDrag && (
-        <div class="absolute inset-0" onMouseDown={handleTopbarMouseDown} />
+        <div 
+          class="absolute inset-0" 
+          onMouseDown={handleTopbarMouseDown}
+          onTouchStart={handleTopbarTouchStart}
+        />
       )}
 
       <div
@@ -282,6 +346,7 @@ export default function Window({
               clipPath: "circle(99% at 100% 0)",
             }}
             onMouseDown={(e) => handleResizeMouseDown(e, "ne")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "ne")}
           />
           <div
             class="absolute bottom-0 right-0 w-3 h-3 cursor-se-resize  bg-neutral opacity-5 hover:opacity-25"
@@ -289,6 +354,7 @@ export default function Window({
               clipPath: "circle(99% at 100% 100%)",
             }}
             onMouseDown={(e) => handleResizeMouseDown(e, "se")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "se")}
           />
           <div
             class="absolute bottom-0 left-0 w-3 h-3 cursor-sw-resize  hover:bg-neutral hover:opacity-25"
@@ -296,6 +362,7 @@ export default function Window({
               clipPath: "circle(99% at 0 100%)",
             }}
             onMouseDown={(e) => handleResizeMouseDown(e, "sw")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "sw")}
           />
           <div
             class="absolute top-0 left-0 w-3 h-3 cursor-nw-resize  hover:bg-neutral hover:opacity-25"
@@ -303,22 +370,27 @@ export default function Window({
               clipPath: "circle(99% at 0 0)",
             }}
             onMouseDown={(e) => handleResizeMouseDown(e, "nw")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "nw")}
           />
           <div
             class="absolute right-0 top-0 bottom-0 w-1 cursor-e-resize  hover:bg-neutral hover:opacity-25"
             onMouseDown={(e) => handleResizeMouseDown(e, "e")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "e")}
           />
           <div
             class="absolute left-0 top-0 bottom-0 w-1 cursor-w-resize  hover:bg-neutral hover:opacity-25"
             onMouseDown={(e) => handleResizeMouseDown(e, "w")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "w")}
           />
           <div
             class="absolute top-0 left-0 right-0 h-1 cursor-n-resize  hover:bg-neutral hover:opacity-25"
             onMouseDown={(e) => handleResizeMouseDown(e, "n")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "n")}
           />
           <div
             class="absolute bottom-0 left-0 right-0 h-1 cursor-s-resize  hover:bg-neutral hover:opacity-25"
             onMouseDown={(e) => handleResizeMouseDown(e, "s")}
+            onTouchStart={(e) => handleResizeTouchStart(e, "s")}
           />
         </>
       )}
