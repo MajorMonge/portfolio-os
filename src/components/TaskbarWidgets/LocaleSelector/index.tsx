@@ -8,10 +8,6 @@ export default function LocaleSelector() {
   const activeLocale = useStore($localeStore);
   const languageOptions = Object.keys(languages);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-language", activeLocale);
-  }, [activeLocale]);
-
   const setActiveLocale = (locale: string) => {
     setLocale(locale as keyof typeof languages);
   };
