@@ -644,7 +644,7 @@
             color: var(--color-base-content) !important;
 
             span {
-            color: var(--color-base-content) !important;
+              color: var(--color-base-content) !important;
             }
           }
         }
@@ -735,6 +735,18 @@
     .inverted-panel {
       border-radius: 0px !important;
       box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    }
+
+    .tooltip {
+
+      &> :where(.tooltip-content),
+      &:where([data-tip])::before {
+        box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px var(--color-base-300), inset 2px 2px var(--color-base-200) !important;
+      }
+
+      &::after {
+        box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #ffffff, inset -2px -2px var(--color-base-300), inset 2px 2px var(--color-base-200) !important;
+      }
     }
   }
 }
