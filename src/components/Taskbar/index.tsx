@@ -39,7 +39,7 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
 
   return (
     <div
-      class={`min-w-[80%] absolute ${getPositionClasses()} z-[999] flex gap-1 items-center justify-start bg-base-200 rounded-box mx-4 my-2 px-4 border-2 border-base-100 shadow-[1px_0px_30px_-15px_rgba(0,0,0,0.75)] w-auto panel taskbar`}
+      class={`min-w-[80%] absolute ${getPositionClasses()} z-[999] flex gap-1 items-center justify-start bg-base-200 rounded-box mx-4 my-2 px-4  shadow-[1px_0px_30px_-15px_rgba(0,0,0,0.75)] w-auto panel taskbar`}
     >
       <div className={"basis-4/5 grow  flex gap-2"}>
         {taskbarApps.map((app) => {
@@ -69,7 +69,7 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
       </div>
       <div
         className={
-          "inset-shadow-xs h-full bg-base-100 px-4 flex gap-2 align-center rounded-box inverted-panel"
+          "inset-shadow-xs h-full px-4 flex gap-2 align-center rounded-box inverted-panel"
         }
       >
         <LocaleSelector />
