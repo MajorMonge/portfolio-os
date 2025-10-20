@@ -6,6 +6,7 @@ interface WindowTopbarProps {
   title: string | JSX.Element;
   isActive?: boolean;
   onMouseDown: (e: MouseEvent) => void;
+  onTouchStart?: (e: TouchEvent) => void;
   onClose?: () => void;
   onMinimize?: () => void;
   onMaximize?: () => void;
@@ -15,6 +16,7 @@ export default function WindowTopbar({
   title,
   isActive = true,
   onMouseDown,
+  onTouchStart,
   onClose,
   onMinimize,
   onMaximize,
@@ -27,6 +29,7 @@ export default function WindowTopbar({
         isActive && "bg-base-300 topbar-active"
       }`}
       onMouseDown={onMouseDown}
+      onTouchStart={onTouchStart}
     >
       <div class="flex items-center min-w-0 flex-1 select-none">
         {typeof title === "string" ? (
