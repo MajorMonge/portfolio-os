@@ -17,6 +17,15 @@ export default {
         themeSelector: {
           tooltip: 'Selecionar Tema',
         },
+        positionSelector: {
+          tooltip: 'Posição da Barra de Tarefas',
+          positions: {
+            top: 'Superior',
+            bottom: 'Inferior',
+            left: 'Esquerda',
+            right: 'Direita',
+          },
+        },
       },
     }
   }
