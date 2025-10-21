@@ -17,6 +17,7 @@ import {
   getAppZIndex,
 } from "@/store/AppStore";
 import { $localeStore } from "@/i18n";
+import { $taskbarStore } from "@/store/TaskbarStore";
 import { getLocalizedAppName } from "@/helpers/appLocalization";
 import {
   fetchNotionPages,
@@ -32,13 +33,11 @@ export default function Desktop() {
     useState<Application[]>(defaultApplications);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [taskbarPosition, setTaskbarPosition] = useState<
-    "left" | "right" | "bottom" | "top"
-  >("bottom");
-
   const apps = useStore($appStore);
   const focusOrder = useStore($focusOrder);
   const locale = useStore($localeStore);
+  const taskbarOptions = useStore($taskbarStore);
+  const taskbarPosition = taskbarOptions.position;
 
   useEffect(() => {
     const fetchApps = async () => {
@@ -90,7 +89,7 @@ export default function Desktop() {
         );
       })}
 
-      <Taskbar position={taskbarPosition} />
+      <Taskbar />
     </div>
   );
 }
