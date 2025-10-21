@@ -7,6 +7,8 @@ import {
   taskbarPositions,
   type TaskbarPosition,
 } from "@/store/TaskbarStore";
+import { getTooltipClasses } from "@/helpers/getPosition";
+import { useDropdownPosition } from "@/helpers/hooks/useDropdownPosition";
 
 const positionIcons: Record<TaskbarPosition, string> = {
   top: "⬆️",
@@ -19,6 +21,7 @@ export default function BarPositionSelector() {
   const { t } = useTranslation();
   const taskbarOptions = useStore($taskbarStore);
   const currentPosition = taskbarOptions.position;
+  const { buttonRef, dropdownClasses } = useDropdownPosition(currentPosition);
 
   const getPositionLabel = (position: TaskbarPosition): string => {
     return t(`ui.taskbar.positionSelector.positions.${position}`);
@@ -29,11 +32,14 @@ export default function BarPositionSelector() {
   };
 
   return (
-    <div className="dropdown dropdown-top flex align-center justify-center">
+    <div
+      className={`${dropdownClasses} flex align-center justify-center`}
+    >
       <div
+        ref={buttonRef}
         tabIndex={0}
         role="button"
-        className="btn btn-ghost btn-square my-auto tooltip"
+        className={`btn btn-ghost btn-square my-auto ${getTooltipClasses(currentPosition)}`}
         data-tip={t("ui.taskbar.positionSelector.tooltip")}
       >
         {positionIcons[currentPosition]}
