@@ -8,6 +8,7 @@ import {
   type TaskbarPosition,
 } from "@/store/TaskbarStore";
 import { getTooltipClassName } from "@/helpers/tooltipPosition";
+import { getDropdownClassName } from "@/helpers/dropdownPosition";
 
 const positionIcons: Record<TaskbarPosition, string> = {
   top: "⬆️",
@@ -30,7 +31,12 @@ export default function BarPositionSelector() {
   };
 
   return (
-    <div className="dropdown dropdown-top flex align-center justify-center">
+    <div
+      className={getDropdownClassName(
+        currentPosition,
+        "flex align-center justify-center"
+      )}
+    >
       <div
         tabIndex={0}
         role="button"
