@@ -5,6 +5,7 @@ import { useStore } from "@nanostores/preact";
 import { useTranslation } from "@/i18n";
 import { $taskbarStore } from "@/store/TaskbarStore";
 import { getTooltipClassName } from "@/helpers/tooltipPosition";
+import { getDropdownClassName } from "@/helpers/dropdownPosition";
 
 export default function ThemeSelector() {
   const { t } = useTranslation();
@@ -13,7 +14,12 @@ export default function ThemeSelector() {
   const taskbarOptions = useStore($taskbarStore);
 
   return (
-    <div className="dropdown dropdown-top flex align-center justify-center">
+    <div
+      className={getDropdownClassName(
+        taskbarOptions.position,
+        "flex align-center justify-center"
+      )}
+    >
       <div
         tabIndex={0}
         role="button"
