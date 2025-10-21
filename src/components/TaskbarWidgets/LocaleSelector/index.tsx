@@ -2,10 +2,13 @@ import { h } from "preact";
 import { $localeStore, setLocale, languages, useTranslation } from "@/i18n";
 import { useEffect } from "preact/hooks";
 import { useStore } from "@nanostores/preact";
+import { $taskbarStore } from "@/store/TaskbarStore";
+import { getTooltipClassName } from "@/helpers/tooltipPosition";
 
 export default function LocaleSelector() {
   const { t } = useTranslation();
   const activeLocale = useStore($localeStore);
+  const taskbarOptions = useStore($taskbarStore);
   const languageOptions = Object.keys(languages);
 
   const setActiveLocale = (locale: string) => {
@@ -17,7 +20,7 @@ export default function LocaleSelector() {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost btn-square my-auto tooltip"
+        className={`btn btn-ghost btn-square my-auto ${getTooltipClassName(taskbarOptions.position)}`}
         data-tip={t("ui.taskbar.localeSelector.tooltip")}
       >
         🔠
