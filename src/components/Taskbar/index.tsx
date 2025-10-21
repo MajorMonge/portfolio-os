@@ -48,7 +48,7 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
       <div
         className={`w-full flex-1 ${
           isHorizontal
-            ? "min-w-0 overflow-x-auto justify-start"
+            ? "min-w-0 overflow-x-auto justify-start pl-2 "
             : "min-h-0 overflow-y-auto items-center pt-2"
         } flex gap-2 ${isHorizontal ? "flex-row" : "flex-col"}`}
         style={{ scrollbarWidth: "thin" }}
