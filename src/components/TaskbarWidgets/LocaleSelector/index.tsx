@@ -4,6 +4,7 @@ import { useEffect } from "preact/hooks";
 import { useStore } from "@nanostores/preact";
 import { $taskbarStore } from "@/store/TaskbarStore";
 import { getTooltipClassName } from "@/helpers/tooltipPosition";
+import { getDropdownClassName } from "@/helpers/dropdownPosition";
 
 export default function LocaleSelector() {
   const { t } = useTranslation();
@@ -16,7 +17,12 @@ export default function LocaleSelector() {
   };
 
   return (
-    <div className="dropdown dropdown-top flex align-center justify-center">
+    <div
+      className={getDropdownClassName(
+        taskbarOptions.position,
+        "flex align-center justify-center"
+      )}
+    >
       <div
         tabIndex={0}
         role="button"
