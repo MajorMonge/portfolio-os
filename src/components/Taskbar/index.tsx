@@ -11,16 +11,21 @@ import {
 import TaskbarClock from "../TaskbarWidgets/TaskbarClock";
 import ThemeSelector from "../TaskbarWidgets/ThemeSelector";
 import LocaleSelector from "../TaskbarWidgets/LocaleSelector";
+import BarPositionSelector from "../TaskbarWidgets/BarPositionSelector";
 import { useStore } from "@nanostores/preact";
+import { $taskbarStore } from "@/store/TaskbarStore";
 
 interface TaskbarProps {
   position?: "left" | "right" | "bottom" | "top";
 }
 
-export default function Taskbar({ position = "bottom" }: TaskbarProps) {
+export default function Taskbar({ position: positionProp }: TaskbarProps) {
   const apps = useStore($appStore);
   const taskbarApps = useStore($taskbarOrder);
   const focusOrder = useStore($focusOrder);
+  const taskbarOptions = useStore($taskbarStore);
+
+  const position = taskbarOptions.position || positionProp || "bottom";
 
   const getPositionConfig = () => {
     switch (position) {
@@ -91,6 +96,7 @@ export default function Taskbar({ position = "bottom" }: TaskbarProps) {
               : "py-4 flex-col flex-shrink-0"
           }`}
         >
+          <BarPositionSelector />
           <LocaleSelector />
           <ThemeSelector />
           <TaskbarClock position={position} />
