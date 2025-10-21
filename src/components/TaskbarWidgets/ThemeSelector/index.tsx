@@ -3,18 +3,21 @@ import { $themeStore, setTheme, themes } from "@/store/ThemeStore";
 import { useEffect } from "preact/hooks";
 import { useStore } from "@nanostores/preact";
 import { useTranslation } from "@/i18n";
+import { $taskbarStore } from "@/store/TaskbarStore";
+import { getTooltipClassName } from "@/helpers/tooltipPosition";
 
 export default function ThemeSelector() {
   const { t } = useTranslation();
 
   const activeTheme = useStore($themeStore);
+  const taskbarOptions = useStore($taskbarStore);
 
   return (
     <div className="dropdown dropdown-top flex align-center justify-center">
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost btn-square my-auto tooltip"
+        className={`btn btn-ghost btn-square my-auto ${getTooltipClassName(taskbarOptions.position)}`}
         data-tip={t("ui.taskbar.themeSelector.tooltip")}
       >
         🎨
