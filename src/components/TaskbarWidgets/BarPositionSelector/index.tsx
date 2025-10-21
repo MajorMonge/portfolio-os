@@ -7,6 +7,7 @@ import {
   taskbarPositions,
   type TaskbarPosition,
 } from "@/store/TaskbarStore";
+import { getTooltipClassName } from "@/helpers/tooltipPosition";
 
 const positionIcons: Record<TaskbarPosition, string> = {
   top: "⬆️",
@@ -33,7 +34,7 @@ export default function BarPositionSelector() {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost btn-square my-auto tooltip"
+        className={`btn btn-ghost btn-square my-auto ${getTooltipClassName(currentPosition)}`}
         data-tip={t("ui.taskbar.positionSelector.tooltip")}
       >
         {positionIcons[currentPosition]}
