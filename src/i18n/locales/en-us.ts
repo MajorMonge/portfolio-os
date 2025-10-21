@@ -17,6 +17,15 @@ export default {
         themeSelector: {
           tooltip: 'Select Theme',
         },
+        positionSelector: {
+          tooltip: 'Taskbar Position',
+          positions: {
+            top: 'Top',
+            bottom: 'Bottom',
+            left: 'Left',
+            right: 'Right',
+          },
+        },
       },
     }
   }
