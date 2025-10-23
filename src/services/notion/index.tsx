@@ -109,9 +109,11 @@ async function getNotionApps(
     body: JSON.stringify({ query: queryParameters }),
   });
   const data = await notionApps.json();
+
   const apps: Application[] = data.results.map((page: PageObjectResponse) =>
     pageToApplication(page)
   );
+
   return apps;
 }
 
@@ -148,7 +150,6 @@ function pageToApplication(page: PageObjectResponse): Application {
     title = titleProperty.title[0].plain_text;
   }
 
-  // Get i18n data and store it for later use
   const i18nProperty = page.properties["i8n"];
   const i18nData = parseRichTextJSON<Record<string, any>>(i18nProperty, {});
 
