@@ -47,7 +47,6 @@ export function bringAppToFront(instanceId: string) {
 }
 
 export function openApp(app: Application) {
-  console.log("Opening app:", app);
   if (app.isExternalLink) {
     const content = app.component?.props?.content;
     let url: string | undefined;
@@ -117,7 +116,7 @@ export function restoreApp(instanceId: string) {
     a.instanceId === instanceId ? { ...a, minimized: false } : a
   );
   $appStore.set(updatedApps);
-  
+
   bringAppToFront(instanceId);
 }
 
