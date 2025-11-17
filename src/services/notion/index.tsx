@@ -98,6 +98,44 @@ async function queryNotionDataSource(
   return data;
 }
 
+async function fetchLocalizedContent(
+  pageId: string
+): Promise<Record<string, string>> {
+  const localizedContent: Record<string, string> = {};
+
+  try {
+    const children = await fetchNotionBlockChildren(pageId);
+    if (!children) return localizedContent;
+
+    for (const block of children.results) {
+      const blockObject = block as BlockObjectResponse;
+
+      if (blockObject.type === "child_page") {
+        const childPageTitle = blockObject.child_page.title.toLowerCase();
+
+        const childContent = await fetchNotionBlockChildren(blockObject.id);
+        if (childContent) {
+          for (const childBlock of childContent.results) {
+            const childBlockObject = childBlock as BlockObjectResponse;
+            if (
+              childBlockObject.type === "code" &&
+              childBlockObject.code &&
+              childBlockObject.code.rich_text.length > 0
+            ) {
+              localizedContent[childPageTitle] = childBlockObject.code.rich_text[0].plain_text;
+              break;
+            }
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching localized content:", error);
+  }
+
+  return localizedContent;
+}
+
 async function getNotionApps(
   queryParameters?: QueryDataSourceParameters
 ): Promise<Application[]> {
@@ -154,7 +192,7 @@ async function pageToApplication(page: PageObjectResponse): Promise<Application>
   const i18nData = parseRichTextJSON<Record<string, any>>(i18nProperty, {});
 
   const appContentProperty = page.properties["AppContent"];
-  let content: string | RichTextItemResponse = "";
+  let content: string | RichTextItemResponse | Record<string, string> = "";
 
   if (appContentProperty) {
     if (
@@ -173,21 +211,27 @@ async function pageToApplication(page: PageObjectResponse): Promise<Application>
       appContentProperty.type === "rich_text" &&
       appContentProperty.rich_text.length === 0
     ) {
-      await fetchNotionBlockChildren(page.id).then((tok) => {
-        if (tok) {
-          for (const block of tok.results) {
-            const blockObject = block as BlockObjectResponse;
-            if (
-              blockObject.type === "code" &&
-              blockObject.code &&
-              blockObject.code.rich_text.length > 0
-            ) {
-              content = blockObject.code.rich_text[0].plain_text;
-              break;
+      const localizedContent = await fetchLocalizedContent(page.id);
+
+      if (Object.keys(localizedContent).length > 0) {
+        content = localizedContent;
+      } else {
+        await fetchNotionBlockChildren(page.id).then((tok) => {
+          if (tok) {
+            for (const block of tok.results) {
+              const blockObject = block as BlockObjectResponse;
+              if (
+                blockObject.type === "code" &&
+                blockObject.code &&
+                blockObject.code.rich_text.length > 0
+              ) {
+                content = blockObject.code.rich_text[0].plain_text;
+                break;
+              }
             }
           }
-        }
-      });
+        });
+      }
     }
   } else {
     content = page.id;
@@ -231,6 +275,7 @@ async function pageToApplication(page: PageObjectResponse): Promise<Application>
     title: title,
     i18n: Object.keys(i18nData).length > 0 ? i18nData : undefined,
     icon: icon,
+    content: typeof content === "object" && !("href" in content) ? content : undefined,
     component: <ContentRenderer content={content} />,
     resizable: appConfig.resizable,
     maximizable: appConfig.maximizable,
@@ -260,4 +305,5 @@ export {
   isNotionPages,
   getNotionApps,
   pageToApplication,
+  fetchLocalizedContent,
 };
