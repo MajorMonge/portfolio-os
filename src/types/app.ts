@@ -20,4 +20,5 @@ export interface Application {
   minimized?: boolean;
   isExternalLink?: boolean;
   externalTarget?: string;
+  content?: string | Record<string, string>;
 }
