@@ -110,8 +110,8 @@ async function getNotionApps(
   });
   const data = await notionApps.json();
 
-  const apps: Application[] = data.results.map((page: PageObjectResponse) =>
-    pageToApplication(page)
+  const apps: Application[] = await Promise.all(
+    data.results.map((page: PageObjectResponse) => pageToApplication(page))
   );
 
   return apps;
@@ -139,7 +139,7 @@ function parseRichTextJSON<T>(property: any, defaultValue: T): T {
   }
 }
 
-function pageToApplication(page: PageObjectResponse): Application {
+async function pageToApplication(page: PageObjectResponse): Promise<Application> {
   const titleProperty = page.properties["Title"];
   let title = "Untitled";
   if (
@@ -169,7 +169,28 @@ function pageToApplication(page: PageObjectResponse): Application {
       }
     } else if (appContentProperty.type === "url" && appContentProperty.url) {
       content = appContentProperty.url;
+    } else if (
+      appContentProperty.type === "rich_text" &&
+      appContentProperty.rich_text.length === 0
+    ) {
+      await fetchNotionBlockChildren(page.id).then((tok) => {
+        if (tok) {
+          for (const block of tok.results) {
+            const blockObject = block as BlockObjectResponse;
+            if (
+              blockObject.type === "code" &&
+              blockObject.code &&
+              blockObject.code.rich_text.length > 0
+            ) {
+              content = blockObject.code.rich_text[0].plain_text;
+              break;
+            }
+          }
+        }
+      });
     }
+  } else {
+    content = page.id;
   }
 
   const appConfigProperty = page.properties["AppConfig"];
