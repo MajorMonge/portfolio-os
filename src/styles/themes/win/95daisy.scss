@@ -586,7 +586,8 @@
 
     .window-inner {
       height: calc(100% - 24px) !important;
-      padding-bottom: 0.5rem !important;
+      padding-bottom: 1rem !important;
+      margin-bottom: 1rem;
     }
 
     input[type="range"]::-moz-range-track {
@@ -732,9 +733,24 @@
       }
     }
 
+    .mockup-code,
     .inverted-panel {
       border-radius: 0px !important;
       box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    }
+
+    .mockup-code {
+      &::before {
+        content: "";
+        margin-bottom: calc(0.25rem * 4);
+        display: block;
+        height: calc(0.25rem * 3);
+        width: calc(0.25rem * 3);
+        border-radius: 0px !important;
+        opacity: 30%;
+        box-shadow: 1.4em 0, 2.8em 0, 4.2em 0;
+        margin-left: -5px;
+      }
     }
 
     .tooltip {
